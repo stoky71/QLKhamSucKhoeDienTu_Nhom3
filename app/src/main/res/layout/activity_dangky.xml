@@ -49,7 +49,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contentDangKy"
-        android:layout_width="395dp"
+        android:layout_width="415dp"
         android:layout_height="610dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/frm_content"
@@ -62,7 +62,7 @@
             android:id="@+id/tvDangKy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="36dp"
             android:text="Đăng ký"
             android:textAllCaps="false"
             android:textColor="#000000"
@@ -86,7 +86,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvDangKy">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtHoTen"
+                android:id="@+id/edtHoTenDK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E5E5E5"
@@ -107,7 +107,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutHoTen">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtSDT"
+                android:id="@+id/edtSDTDK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E5E5E5"
@@ -128,7 +128,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutSDT">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtEmail"
+                android:id="@+id/edtEmailDK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E5E5E5"
@@ -151,7 +151,7 @@
             app:passwordToggleTintMode="src_in">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtMK"
+                android:id="@+id/edtMKDK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E5E5E5"
@@ -188,7 +188,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btnDangKy" />
 
         <TextView
-            android:id="@+id/tvDN"
+            android:id="@+id/tvDNNgay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="60dp"

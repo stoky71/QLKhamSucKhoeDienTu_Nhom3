@@ -89,7 +89,8 @@
                 android:id="@+id/edtHoTen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E5E5E5" />
+                android:background="#E5E5E5"
+                android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -109,7 +110,8 @@
                 android:id="@+id/edtSDT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E5E5E5" />
+                android:background="#E5E5E5"
+                android:inputType="phone" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -129,7 +131,8 @@
                 android:id="@+id/edtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E5E5E5" />
+                android:background="#E5E5E5"
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -143,13 +146,16 @@
             android:textColorHint="#80000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutEmail"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTintMode="src_in">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edtMK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#E5E5E5" />
+                android:background="#E5E5E5"
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <android.widget.Button

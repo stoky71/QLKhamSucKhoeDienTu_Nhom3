@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.QLKhamSucKhoeDienTu_Nhom3">
         <activity
+            android:name=".NguoDung_Activity"
+            android:exported="false" />
+        <activity
             android:name=".SuaThongTinCaNhan_Activity"
             android:exported="false" />
         <activity

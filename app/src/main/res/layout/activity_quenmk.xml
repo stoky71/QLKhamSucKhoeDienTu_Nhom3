@@ -63,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="45dp"
-            android:text="Quên mật khẩu"
+            android:text="Quên / Đổi mật khẩu"
             android:textAllCaps="false"
             android:textColor="#000000"
             android:textSize="24sp"

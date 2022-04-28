@@ -107,7 +107,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayoutHoTen">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtSDTDK"
+                android:id="@+id/edtSdtDK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E5E5E5"
@@ -151,7 +151,7 @@
             app:passwordToggleTintMode="src_in">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtMKDK"
+                android:id="@+id/edtMkDK"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#E5E5E5"

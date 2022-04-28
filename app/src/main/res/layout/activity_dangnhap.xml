@@ -113,7 +113,7 @@
             app:passwordToggleTintMode="src_in">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edtMKDN"
+                android:id="@+id/edtMkDN"
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:background="#E5E5E5"

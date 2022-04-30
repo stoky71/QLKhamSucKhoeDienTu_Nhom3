@@ -8,13 +8,13 @@
 
     <android.widget.Button
         android:id="@+id/btnDangXuat"
-        android:layout_width="273dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="546dp"
+        android:layout_width="298dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="284dp"
         android:background="@drawable/button"
         android:drawableStart="@drawable/logo_btn"
-        android:paddingLeft="35dp"
         android:drawablePadding="-30dp"
+        android:paddingLeft="35dp"
         android:text="Đăng xuất"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
@@ -23,5 +23,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/btnChinhSuaTT"
+        android:layout_width="300dp"
+        android:layout_height="69dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/button"
+        android:drawableStart="@drawable/logo_btn"
+        android:drawablePadding="-30dp"
+        android:paddingLeft="35dp"
+        android:text="Chỉnh sửa thông tin"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnDangXuat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

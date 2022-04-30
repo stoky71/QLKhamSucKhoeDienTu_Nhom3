@@ -1,12 +1,13 @@
 package com.example.qlkhamsuckhoedientu_nhom3;
 
 public class ThongTinCaNhan {
+    private String gioiTinh;
     private String hoTen;
     private String ngaySinh;
-    private String gioiTinh;
     private String sdt;
-    private String soCMND;
     private String soBHYT;
+    private String soCMND;
+
 
     public String getHoTen() {
         return hoTen;
@@ -56,14 +57,14 @@ public class ThongTinCaNhan {
         this.soBHYT = soBHYT;
     }
 
-    public ThongTinCaNhan(String hoTen, String ngaySinh, String gioiTinh, String sdt, String soCMND, String soBHYT) {
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
-        this.gioiTinh = gioiTinh;
-        this.sdt = sdt;
-        this.soCMND = soCMND;
-        this.soBHYT = soBHYT;
-    }
+//    public ThongTinCaNhan(String hoTen, String ngaySinh, String gioiTinh, String sdt, String soCMND, String soBHYT) {
+//        this.hoTen = hoTen;
+//        this.ngaySinh = ngaySinh;
+//        this.gioiTinh = gioiTinh;
+//        this.sdt = sdt;
+//        this.soCMND = soCMND;
+//        this.soBHYT = soBHYT;
+//    }
 
     public ThongTinCaNhan(String hoTen, String sdt) {
         this.hoTen = hoTen;
@@ -71,5 +72,26 @@ public class ThongTinCaNhan {
     }
 
     public ThongTinCaNhan() {
+    }
+
+    public ThongTinCaNhan(String gioiTinh, String hoTen, String ngaySinh, String sdt, String soBHYT, String soCMND) {
+        this.gioiTinh = gioiTinh;
+        this.hoTen = hoTen;
+        this.ngaySinh = ngaySinh;
+        this.sdt = sdt;
+        this.soBHYT = soBHYT;
+        this.soCMND = soCMND;
+    }
+
+    @Override
+    public String toString() {
+        return "ThongTinCaNhan{" +
+                "gioiTinh='" + gioiTinh + '\'' +
+                ", hoTen='" + hoTen + '\'' +
+                ", ngaySinh='" + ngaySinh + '\'' +
+                ", sdt='" + sdt + '\'' +
+                ", soBHYT='" + soBHYT + '\'' +
+                ", soCMND='" + soCMND + '\'' +
+                '}';
     }
 }

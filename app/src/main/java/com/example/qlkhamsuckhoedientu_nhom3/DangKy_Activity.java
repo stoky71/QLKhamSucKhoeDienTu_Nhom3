@@ -115,7 +115,7 @@ public class DangKy_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            thongTinCaNhan = new ThongTinCaNhan(txtHoTenDK, "", "", txtSdtDK, "", "");
+                            thongTinCaNhan = new ThongTinCaNhan("", "txtHoTenDK", "", "txtSdtDK", "", "");
                             taiKhoan = new TaiKhoan(txtEmailDK, txtMkDK);
                             lichSuKham = new ThongTinLichSuKham("", "", "", "");
 

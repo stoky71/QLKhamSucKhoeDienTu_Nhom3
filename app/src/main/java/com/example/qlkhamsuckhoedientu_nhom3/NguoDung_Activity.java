@@ -17,6 +17,7 @@ public class NguoDung_Activity extends AppCompatActivity {
     private DatabaseReference ref;
 
     Button btnDangXuat;
+    Button btnChinhSua;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +25,12 @@ public class NguoDung_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_nguoidung);
 
         btnDangXuat = findViewById(R.id.btnDangXuat);
+        btnChinhSua=findViewById(R.id.btnChinhSuaTT);
 
 
         auth = FirebaseAuth.getInstance();
         dangXuat();
+        chinhSuaThongTin();
     }
 
     public void dangXuat(){
@@ -36,6 +39,16 @@ public class NguoDung_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 auth.signOut();
                 NguoDung_Activity.this.startActivity(new Intent(NguoDung_Activity.this, DangNhap_Activity.class));
+            }
+        });
+    }
+
+    public void chinhSuaThongTin(){
+        btnChinhSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(NguoDung_Activity.this, SuaThongTinCaNhan_Activity.class);
+                startActivity(intent);
             }
         });
     }

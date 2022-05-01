@@ -33,6 +33,7 @@ public class NguoDung_Activity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         dangXuat();
         chinhSuaThongTin();
+        lichSuKham();
     }
 
     public void dangXuat(){

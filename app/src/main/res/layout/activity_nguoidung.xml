@@ -11,7 +11,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="4dp"
         android:text="Phùng Bùi Trọng Hiếu"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
@@ -24,23 +24,12 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Xin chào,"
         android:textColor="#FFFFFF"
         android:textSize="18dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/vector__7_"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,8 +57,8 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="411dp"
-        android:layout_height="551dp"
+        android:layout_width="392dp"
+        android:layout_height="625dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/frm_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +69,7 @@
             android:id="@+id/btnDangXuat"
             android:layout_width="298dp"
             android:layout_height="64dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/button"
             android:drawableStart="@drawable/logo_btn"
             android:drawablePadding="-30dp"
@@ -91,7 +80,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/btnDoiMatKhau"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/btnDoiMatKhau"
             app:layout_constraintTop_toBottomOf="@+id/btnDoiMatKhau" />
 
@@ -99,7 +88,7 @@
             android:id="@+id/btnChinhSuaTT"
             android:layout_width="300dp"
             android:layout_height="69dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/button"
             android:drawableStart="@drawable/logo_btn"
             android:drawablePadding="-30dp"
@@ -137,7 +126,7 @@
             android:id="@+id/btnDoiMatKhau"
             android:layout_width="300dp"
             android:layout_height="69dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="60dp"
             android:background="@drawable/button"
             android:drawableStart="@drawable/logo_btn"
             android:drawablePadding="-30dp"
@@ -148,7 +137,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/btnChinhSuaTT"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/btnChinhSuaTT"
             app:layout_constraintTop_toBottomOf="@+id/btnChinhSuaTT" />
     </androidx.constraintlayout.widget.ConstraintLayout>

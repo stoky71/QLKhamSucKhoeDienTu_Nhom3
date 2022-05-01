@@ -72,8 +72,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content_lichsukhambenh"
-        android:layout_width="415dp"
-        android:layout_height="588dp"
+        android:layout_width="419dp"
+        android:layout_height="633dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/frm_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,24 +81,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <TextView
-            android:id="@+id/BHYTtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="28dp"
-            android:text="BHYT"
-            android:textColor="#07919C"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/BVtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="88dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="124dp"
             android:text="Bệnh Viện"
             android:textColor="#07919C"
             android:textSize="16dp"
@@ -107,21 +94,23 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/kqBHYTtxt"
-            android:layout_width="66dp"
-            android:layout_height="19dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="8dp"
-            android:text="Có"
+            android:id="@+id/BHYTtxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="32dp"
+            android:text="BHYT"
+            android:textColor="#07919C"
             android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BHYTtxt" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/ChuanDoantxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="64dp"
             android:text="Chuẩn đoán"
             android:textColor="#07919C"
             android:textColorHighlight="#07919C"
@@ -134,7 +123,7 @@
             android:id="@+id/Khoatxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="64dp"
             android:text="Khoa"
             android:textColor="#07919C"
             android:textSize="16dp"
@@ -142,53 +131,21 @@
             app:layout_constraintStart_toStartOf="@+id/BVtxt"
             app:layout_constraintTop_toBottomOf="@+id/BVtxt" />
 
-        <TextView
-            android:id="@+id/tenBVtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="100dp"
-            android:text="115"
-            android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BVtxt" />
-
-        <TextView
-            android:id="@+id/kqChuanDoantxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="4dp"
-            android:text="Cao huyết áp"
-            android:textSize="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ChuanDoantxt" />
-
-        <TextView
-            android:id="@+id/tenKhoatxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="56dp"
-            android:text="Thần kinh"
-            android:textSize="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Khoatxt" />
-
         <Button
             android:id="@+id/btnLuu"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="20dp"
             android:backgroundTint="#07919C"
             android:text="Lưu"
-            app:layout_constraintStart_toStartOf="@+id/ChuanDoantxt"
-            app:layout_constraintTop_toBottomOf="@+id/kqChuanDoantxt" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edtChuanDoan" />
 
         <Button
             android:id="@+id/btnXoa"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginStart="24dp"
             android:backgroundTint="#07919C"
             android:text="Xóa"
@@ -202,7 +159,7 @@
         <Button
             android:id="@+id/btnHuy"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:layout_marginEnd="28dp"
             android:backgroundTint="#07919C"
             android:text="Hủy"
@@ -210,5 +167,68 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btnXoa"
             app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
+            android:id="@+id/edtBHYT"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="5dp"
+            android:background="#80C4C4C4"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:paddingTop="12dp"
+            android:text="Có"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/BHYTtxt"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/edtBenhVien"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="52dp"
+            android:background="#80C4C4C4"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:paddingTop="12dp"
+            android:text="115"
+            app:layout_constraintBottom_toBottomOf="@+id/edtBHYT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edtBHYT"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/edtChuanDoan"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="5dp"
+            android:background="#80C4C4C4"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:paddingTop="12dp"
+            android:text="Tăng huyết áp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ChuanDoantxt"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <EditText
+            android:id="@+id/edtKhoa"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="52dp"
+            android:background="#80C4C4C4"
+            android:drawablePadding="10dp"
+            android:inputType="text"
+            android:paddingTop="12dp"
+            android:text="Thần kinh"
+            app:layout_constraintBottom_toBottomOf="@+id/edtChuanDoan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/edtChuanDoan"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TouchTargetSizeCheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

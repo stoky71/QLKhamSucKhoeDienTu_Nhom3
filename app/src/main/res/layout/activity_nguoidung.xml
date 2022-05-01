@@ -4,42 +4,153 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#07919C"
     tools:context=".NguoDung_Activity">
 
-    <android.widget.Button
-        android:id="@+id/btnDangXuat"
-        android:layout_width="298dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="284dp"
-        android:background="@drawable/button"
-        android:drawableStart="@drawable/logo_btn"
-        android:drawablePadding="-30dp"
-        android:paddingLeft="35dp"
-        android:text="Đăng xuất"
-        android:textAllCaps="false"
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Phùng Bùi Trọng Hiếu"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
+        android:textColorHighlight="#FFFFFF"
+        android:textSize="18dp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Xin chào,"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/vector__7_"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.041"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.widget.Button
-        android:id="@+id/btnChinhSuaTT"
-        android:layout_width="300dp"
-        android:layout_height="69dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/button"
-        android:drawableStart="@drawable/logo_btn"
-        android:drawablePadding="-30dp"
-        android:paddingLeft="35dp"
-        android:text="Chỉnh sửa thông tin"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="74dp"
+        android:layout_height="64dp"
+        android:src="@drawable/user_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TrangChutv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Trang chủ"
+        android:textColor="#F4F4F4"
+        android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDangXuat" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="411dp"
+        android:layout_height="551dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/frm_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TrangChutv">
+
+        <android.widget.Button
+            android:id="@+id/btnDangXuat"
+            android:layout_width="298dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            android:drawableStart="@drawable/logo_btn"
+            android:drawablePadding="-30dp"
+            android:paddingLeft="35dp"
+            android:text="Đăng xuất"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/btnDoiMatKhau"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btnDoiMatKhau"
+            app:layout_constraintTop_toBottomOf="@+id/btnDoiMatKhau" />
+
+        <android.widget.Button
+            android:id="@+id/btnChinhSuaTT"
+            android:layout_width="300dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button"
+            android:drawableStart="@drawable/logo_btn"
+            android:drawablePadding="-30dp"
+            android:paddingLeft="35dp"
+            android:text="       Chỉnh sửa thông tin   cá nhân"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/btnLichSuKham"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btnLichSuKham"
+            app:layout_constraintTop_toBottomOf="@+id/btnLichSuKham" />
+
+        <android.widget.Button
+            android:id="@+id/btnLichSuKham"
+            android:layout_width="300dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            android:drawableStart="@drawable/logo_btn"
+            android:drawablePadding="-30dp"
+            android:paddingLeft="35dp"
+            android:text="      Lịch sử khám - tư vấn"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.widget.Button
+            android:id="@+id/btnDoiMatKhau"
+            android:layout_width="300dp"
+            android:layout_height="69dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            android:drawableStart="@drawable/logo_btn"
+            android:drawablePadding="-30dp"
+            android:paddingLeft="35dp"
+            android:text="Đổi mật khẩu"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/btnChinhSuaTT"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/btnChinhSuaTT"
+            app:layout_constraintTop_toBottomOf="@+id/btnChinhSuaTT" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

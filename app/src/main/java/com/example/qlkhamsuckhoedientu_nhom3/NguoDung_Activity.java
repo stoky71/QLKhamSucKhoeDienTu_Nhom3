@@ -18,15 +18,17 @@ public class NguoDung_Activity extends AppCompatActivity {
 
     Button btnDangXuat;
     Button btnChinhSua;
-
+    Button btnLichSuKham;
+    Button btnDoiMatKhau;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nguoidung);
 
         btnDangXuat = findViewById(R.id.btnDangXuat);
-        btnChinhSua=findViewById(R.id.btnChinhSuaTT);
-
+        btnChinhSua = findViewById(R.id.btnChinhSuaTT);
+        btnLichSuKham = findViewById(R.id.btnLichSuKham);
+        btnDoiMatKhau = findViewById(R.id.btnDoiMatKhau);
 
         auth = FirebaseAuth.getInstance();
         dangXuat();
@@ -48,6 +50,15 @@ public class NguoDung_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(NguoDung_Activity.this, SuaThongTinCaNhan_Activity.class);
+                startActivity(intent);
+            }
+        });
+    }
+    public void lichSuKham(){
+        btnLichSuKham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(NguoDung_Activity.this, LichSuKham_TuVan_Activity.class);
                 startActivity(intent);
             }
         });

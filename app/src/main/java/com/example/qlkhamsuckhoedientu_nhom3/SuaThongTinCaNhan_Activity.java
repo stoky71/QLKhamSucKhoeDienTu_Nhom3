@@ -89,7 +89,7 @@ public class SuaThongTinCaNhan_Activity extends AppCompatActivity {
         rdKhac=findViewById(R.id.rdKhac);
         btnCapNhat=findViewById(R.id.btnCapNhat);
         btnHuyBo=findViewById(R.id.btnHuyBo);
-        imgBack=findViewById(R.id.imgBack);
+        imgBack=findViewById(R.id.imgBack_SuaTT);
         imgAvatar=findViewById(R.id.imgAvatar);
     }
 

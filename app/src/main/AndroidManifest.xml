@@ -19,7 +19,7 @@
             android:name=".LichSuKham_TuVan_Activity"
             android:exported="false" />
         <activity
-            android:name=".QuenMK_Activity"
+            android:name=".Quen_DoiMK_Activity"
             android:exported="false" />
         <activity
             android:name=".DangNhap_Activity"

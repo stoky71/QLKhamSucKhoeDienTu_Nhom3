@@ -1,10 +1,19 @@
 package com.example.qlkhamsuckhoedientu_nhom3;
 
-public class ThongTinLichSuKham {
+public class ThongTinLSKham_TuVan {
+    private String ngayKham;
     private String BHYT;
-    private String chuanDoan;
     private String benhVien;
     private String khoa;
+    private String chuanDoan;
+
+    public String getNgayKham() {
+        return ngayKham;
+    }
+
+    public void setNgayKham(String ngayKham) {
+        this.ngayKham = ngayKham;
+    }
 
     public String getBHYT() {
         return BHYT;
@@ -38,13 +47,21 @@ public class ThongTinLichSuKham {
         this.khoa = khoa;
     }
 
-    public ThongTinLichSuKham(String BHYT, String chuanDoan, String benhVien, String khoa) {
+    public ThongTinLSKham_TuVan(String ngayKham, String BHYT, String chuanDoan, String benhVien, String khoa) {
+        this.ngayKham = ngayKham;
         this.BHYT = BHYT;
         this.chuanDoan = chuanDoan;
         this.benhVien = benhVien;
         this.khoa = khoa;
     }
 
-    public ThongTinLichSuKham() {
+    public ThongTinLSKham_TuVan(String BHYT, String chuanDoan, String benhVien, String khoa) {
+        this.BHYT = BHYT;
+        this.chuanDoan = chuanDoan;
+        this.benhVien = benhVien;
+        this.khoa = khoa;
+    }
+
+    public ThongTinLSKham_TuVan() {
     }
 }

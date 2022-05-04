@@ -16,7 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DangNhap_Activity extends AppCompatActivity {
     private TaiKhoan taiKhoan;
@@ -56,7 +60,7 @@ public class DangNhap_Activity extends AppCompatActivity {
         tvQuenMK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DangNhap_Activity.this.startActivity(new Intent(DangNhap_Activity.this, QuenMK_Activity.class));
+                DangNhap_Activity.this.startActivity(new Intent(DangNhap_Activity.this, Quen_DoiMK_Activity.class));
             }
         });
     }
@@ -89,6 +93,8 @@ public class DangNhap_Activity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 taiKhoan = new TaiKhoan(txtEmailDN, txtMkDN);
                                 infoTkDN(taiKhoan);
+
+//                                thongTinCaNhan = new ThongTinCaNhan(taiKhoan.getHoTen());
 
                                 Toast.makeText(DangNhap_Activity.this, "Tài khoản có email là " + txtEmailDN + " đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 DangNhap_Activity.this.startActivity(new Intent(DangNhap_Activity.this, NguoDung_Activity.class));

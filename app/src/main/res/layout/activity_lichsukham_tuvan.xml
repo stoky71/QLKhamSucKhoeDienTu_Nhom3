@@ -8,59 +8,20 @@
     tools:context=".LichSuKham_TuVan_Activity">
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/vector__7_"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
+        android:id="@+id/imgBack_LSKham"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
-        android:text="Xin chào,"
-        android:textColor="#FFFFFF"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Phùng Bùi Trọng Hiếu"
-        android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="74dp"
-        android:layout_height="64dp"
-        android:src="@drawable/user_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/vector__7_" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:text="Lịch sử khám bệnh - Tư vấn"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
@@ -68,75 +29,61 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/content_lichsukhambenh"
-        android:layout_width="419dp"
-        android:layout_height="633dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="423dp"
+        android:layout_height="696dp"
+        android:layout_marginTop="9dp"
         android:background="@drawable/frm_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <TextView
-            android:id="@+id/BVtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="124dp"
-            android:text="Bệnh Viện"
-            android:textColor="#07919C"
-            android:textSize="16dp"
-            android:textStyle="bold"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="74dp"
+            android:layout_height="64dp"
+            android:src="@drawable/user_icon"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ListView
+            android:id="@+id/lvLSKham"
+            android:layout_width="396dp"
+            android:layout_height="328dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLuu"
+            app:layout_constraintVertical_bias="0.0" />
+
         <TextView
-            android:id="@+id/BHYTtxt"
+            android:id="@+id/tvBHYT_LS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="32dp"
-            android:text="BHYT"
+            android:layout_marginTop="72dp"
+            android:text="BHYT:"
             android:textColor="#07919C"
             android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/ChuanDoantxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:text="Chuẩn đoán"
-            android:textColor="#07919C"
-            android:textColorHighlight="#07919C"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/BHYTtxt"
-            app:layout_constraintTop_toBottomOf="@+id/BHYTtxt" />
-
-        <TextView
-            android:id="@+id/Khoatxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="64dp"
-            android:text="Khoa"
-            android:textColor="#07919C"
-            android:textSize="16dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/BVtxt"
-            app:layout_constraintTop_toBottomOf="@+id/BVtxt" />
-
         <Button
             android:id="@+id/btnLuu"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="28dp"
             android:backgroundTint="#07919C"
             android:text="Lưu"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +98,7 @@
             android:text="Xóa"
             app:layout_constraintBottom_toBottomOf="@+id/btnLuu"
             app:layout_constraintEnd_toStartOf="@+id/btnHuy"
-            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintHorizontal_bias="0.254"
             app:layout_constraintStart_toEndOf="@+id/btnLuu"
             app:layout_constraintTop_toTopOf="@+id/btnLuu"
             app:layout_constraintVertical_bias="0.0" />
@@ -160,7 +107,7 @@
             android:id="@+id/btnHuy"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:layout_marginEnd="28dp"
+            android:layout_marginEnd="40dp"
             android:backgroundTint="#07919C"
             android:text="Hủy"
             app:layout_constraintBottom_toBottomOf="@+id/btnXoa"
@@ -170,65 +117,92 @@
 
         <EditText
             android:id="@+id/edtBHYT"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="14dp"
             android:background="#80C4C4C4"
-            android:drawablePadding="10dp"
             android:inputType="text"
-            android:paddingTop="12dp"
-            android:text="Có"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/BHYTtxt"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <EditText
-            android:id="@+id/edtBenhVien"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="52dp"
-            android:background="#80C4C4C4"
-            android:drawablePadding="10dp"
-            android:inputType="text"
-            android:paddingTop="12dp"
-            android:text="115"
-            app:layout_constraintBottom_toBottomOf="@+id/edtBHYT"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edtBHYT"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TouchTargetSizeCheck" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvBHYT_LS"
+            app:layout_constraintStart_toEndOf="@+id/tvBHYT_LS"
+            app:layout_constraintTop_toTopOf="@+id/tvBHYT_LS"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
         <EditText
             android:id="@+id/edtChuanDoan"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="56dp"
-            android:layout_marginTop="5dp"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="40dp"
             android:background="#80C4C4C4"
-            android:drawablePadding="10dp"
             android:inputType="text"
-            android:paddingTop="12dp"
-            android:text="Tăng huyết áp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvCD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvCD"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvBV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:text="Bệnh viện:"
+            android:textColor="#07919C"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/edtBHYT"
+            app:layout_constraintStart_toEndOf="@+id/edtBHYT"
+            app:layout_constraintTop_toTopOf="@+id/edtBHYT" />
+
+        <TextView
+            android:id="@+id/tvKhoa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:text="Khoa:"
+            android:textColor="#07919C"
+            android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ChuanDoantxt"
-            tools:ignore="TouchTargetSizeCheck" />
+            app:layout_constraintTop_toBottomOf="@+id/tvBHYT_LS" />
+
+        <EditText
+            android:id="@+id/edtBenhVien"
+            android:layout_width="110dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="40dp"
+            android:background="#80C4C4C4"
+            android:inputType="text"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvBV"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/tvCD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="30dp"
+            android:text="Chuẩn đoán:"
+            android:textColor="#07919C"
+            android:textColorHighlight="#07919C"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvKhoa" />
 
         <EditText
             android:id="@+id/edtKhoa"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="52dp"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="40dp"
             android:background="#80C4C4C4"
-            android:drawablePadding="10dp"
             android:inputType="text"
-            android:paddingTop="12dp"
-            android:text="Thần kinh"
-            app:layout_constraintBottom_toBottomOf="@+id/edtChuanDoan"
+            app:layout_constraintBottom_toBottomOf="@+id/tvKhoa"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edtChuanDoan"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TouchTargetSizeCheck" />
+            app:layout_constraintTop_toTopOf="@+id/tvKhoa"
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,9 +66,8 @@ public class ThongTinCaNhan {
 //        this.soBHYT = soBHYT;
 //    }
 
-    public ThongTinCaNhan(String hoTen, String sdt) {
+    public ThongTinCaNhan(String hoTen) {
         this.hoTen = hoTen;
-        this.sdt = sdt;
     }
 
     public ThongTinCaNhan() {

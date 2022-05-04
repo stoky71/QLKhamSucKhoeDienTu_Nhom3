@@ -25,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 public class DangKy_Activity extends AppCompatActivity {
     private TaiKhoan taiKhoan;
     private ThongTinCaNhan thongTinCaNhan;
-    private ThongTinLichSuKham lichSuKham;
+    private ThongTinLSKham_TuVan lichSuKham;
 
     private FirebaseAuth auth;
     private DatabaseReference ref;
@@ -115,11 +115,11 @@ public class DangKy_Activity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            thongTinCaNhan = new ThongTinCaNhan("", "txtHoTenDK", "", "txtSdtDK", "", "");
+                            thongTinCaNhan = new ThongTinCaNhan("", txtHoTenDK, "", txtSdtDK, "", "");
                             taiKhoan = new TaiKhoan(txtEmailDK, txtMkDK);
-                            lichSuKham = new ThongTinLichSuKham("", "", "", "");
+//                            lichSuKham = new ThongTinLSKham_TuVan();
 
-                            addDataToRealtimeDB(taiKhoan, thongTinCaNhan, lichSuKham);
+                            addDataToRealtimeDB(taiKhoan, thongTinCaNhan);
 
                             Toast.makeText(DangKy_Activity.this, "Tài khoản có email là " +txtEmailDK+" đăng ký thành công!", Toast.LENGTH_SHORT).show();
                             DangKy_Activity.this.startActivity(new Intent(DangKy_Activity.this, NguoDung_Activity.class));
@@ -138,23 +138,23 @@ public class DangKy_Activity extends AppCompatActivity {
                 });
     }
 
-    public void addDataToRealtimeDB(TaiKhoan taiKhoan, ThongTinCaNhan thongTinCaNhan, ThongTinLichSuKham lichSuKham){
+    public void addDataToRealtimeDB(TaiKhoan taiKhoan, ThongTinCaNhan thongTinCaNhan){
         ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
         ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Tài khoản").setValue(taiKhoan);
         ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Thông tin cá nhân").setValue(thongTinCaNhan);
-        ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Lịch sử khám - tư vấn").setValue(lichSuKham);
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+//        ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Lịch sử khám - Tư vấn").setValue(lichSuKham);
+//        ref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.exists()){
+//
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
     //check tk đăng ký

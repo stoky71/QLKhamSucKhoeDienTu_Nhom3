@@ -16,7 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class NguoDung_Activity extends AppCompatActivity {
+public class NguoiDung_Activity extends AppCompatActivity {
     private TaiKhoan taiKhoan;
 
     private FirebaseAuth auth;
@@ -41,10 +41,12 @@ public class NguoDung_Activity extends AppCompatActivity {
         //nhận data tên người dùng
         loadUserName();
 
+        lichSuKham();
+        chinhSuaThongTin();
+        doiMK();
+
         auth = FirebaseAuth.getInstance();
         dangXuat();
-        chinhSuaThongTin();
-        lichSuKham();
     }
 
     public void loadUserName() {
@@ -64,12 +66,12 @@ public class NguoDung_Activity extends AppCompatActivity {
                 });
     }
 
-    public void dangXuat(){
-        btnDangXuat.setOnClickListener(new View.OnClickListener() {
+    public void lichSuKham(){
+        btnLichSuKham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auth.signOut();
-                NguoDung_Activity.this.startActivity(new Intent(NguoDung_Activity.this, DangNhap_Activity.class));
+                Intent intent=new Intent(NguoiDung_Activity.this, LichSuKham_TuVan_Activity.class);
+                startActivity(intent);
             }
         });
     }
@@ -78,18 +80,29 @@ public class NguoDung_Activity extends AppCompatActivity {
         btnChinhSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(NguoDung_Activity.this, SuaThongTinCaNhan_Activity.class);
+                Intent intent=new Intent(NguoiDung_Activity.this, SuaThongTinCaNhan_Activity.class);
                 startActivity(intent);
             }
         });
     }
-    public void lichSuKham(){
-        btnLichSuKham.setOnClickListener(new View.OnClickListener() {
+
+    public void doiMK() {
+        btnDoiMatKhau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(NguoDung_Activity.this, LichSuKham_TuVan_Activity.class);
-                startActivity(intent);
+                startActivity(new Intent(NguoiDung_Activity.this, Quen_DoiMK_Activity.class));
             }
         });
     }
+
+    public void dangXuat(){
+        btnDangXuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                auth.signOut();
+                NguoiDung_Activity.this.startActivity(new Intent(NguoiDung_Activity.this, DangNhap_Activity.class));
+            }
+        });
+    }
+
 }

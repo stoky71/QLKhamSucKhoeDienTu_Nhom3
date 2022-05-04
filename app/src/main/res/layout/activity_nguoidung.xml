@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#07919C"
-    tools:context=".NguoDung_Activity">
+    tools:context=".NguoiDung_Activity">
 
     <TextView
         android:id="@+id/tvTenNguoiDung"
@@ -111,7 +111,7 @@
             android:drawableStart="@drawable/logo_btn"
             android:drawablePadding="-10dp"
             android:paddingLeft="20dp"
-            android:text="Lịch sử khám - tư vấn"
+            android:text="Lịch sử khám - Tư vấn"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="20sp"

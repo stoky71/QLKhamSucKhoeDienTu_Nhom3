@@ -60,7 +60,7 @@ public class SuaThongTinCaNhan_Activity extends AppCompatActivity {
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(SuaThongTinCaNhan_Activity.this, NguoDung_Activity.class);
+                Intent intent=new Intent(SuaThongTinCaNhan_Activity.this, NguoiDung_Activity.class);
                 startActivity(intent);
             }
         });

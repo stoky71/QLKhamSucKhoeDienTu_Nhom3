@@ -122,7 +122,7 @@ public class DangKy_Activity extends AppCompatActivity {
                             addDataToRealtimeDB(taiKhoan, thongTinCaNhan);
 
                             Toast.makeText(DangKy_Activity.this, "Tài khoản có email là " +txtEmailDK+" đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                            DangKy_Activity.this.startActivity(new Intent(DangKy_Activity.this, NguoDung_Activity.class));
+                            DangKy_Activity.this.startActivity(new Intent(DangKy_Activity.this, NguoiDung_Activity.class));
 
                             edtHoTenDK.setText("");
                             edtSdtDK.setText("");

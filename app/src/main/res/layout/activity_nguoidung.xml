@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/imgAvaUser"
         android:layout_width="74dp"
         android:layout_height="64dp"
         android:src="@drawable/user_icon"

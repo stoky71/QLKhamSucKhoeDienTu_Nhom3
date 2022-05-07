@@ -1,32 +1,40 @@
 package com.example.qlkhamsuckhoedientu_nhom3;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class LichSuKham_TuVan_Activity extends AppCompatActivity {
     private TaiKhoan taiKhoan;
     private ThongTinLSKham_TuVan thongTinLSKham_tuVan;
-    private LSKham_TuVan_Adapter lsKhamTuVanAdapter;
-    private ArrayList<ThongTinLSKham_TuVan> arrayList;
+    private ArrayList<String> arrayList=new ArrayList<>();
+    private ArrayAdapter<String> arrayAdapter;
 
     private DatabaseReference ref;
 
@@ -38,6 +46,8 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
     ImageView imgBack_LSKham;
     EditText edtBHYT, edtBenhVien, edtKhoa, edtChuanDoan;
     Button btnLuu, btnXoa, btnHuy;
+
+    TextView tvInfoLSK;
     ListView lvLSKham;
 
     @Override
@@ -46,6 +56,7 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_lichsukham_tuvan);
 
         imgBack_LSKham = findViewById(R.id.imgBack_LSKham);
+        tvInfoLSK = findViewById(R.id.tvInfoLSK);
         edtBHYT = findViewById(R.id.edtBHYT);
         edtBenhVien = findViewById(R.id.edtBenhVien);
         edtKhoa = findViewById(R.id.edtKhoa);
@@ -55,6 +66,9 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         btnHuy = findViewById(R.id.btnHuy);
         lvLSKham = findViewById(R.id.lvLSKham);
 
+//        loadNgayGioHT();
+        showDataLV();
+
 //        arrayList = new ArrayList<ThongTinLichSuKham>();
 //        ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
 //        ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Lịch sử khám - Tư vấn");
@@ -63,12 +77,14 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
 //        lvLSKham.setAdapter(lsKhamTuVanAdapter);
 
 
+//        showDataLV(ngayGioHT);
+
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 addDataToRealtimeDB();
-                showLV();
+//                showDataLV();
             }
         });
 
@@ -87,10 +103,6 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         });
     }
 
-    public void showLV() {
-
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void addDataToRealtimeDB() {
         String txtBHYT = edtBHYT.getText().toString().trim(),
@@ -104,14 +116,16 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         thang = now.getMonthValue();
         nam = now.getYear();
         ngayHT = new Date(nam - 1900, thang - 1, ngay);
-        String ngayHienTai = sdfNgayHT.format(ngayHT);
 
         //gio,phut,giay hien tai
         gioHT = new Date();
         gio = gioHT.getHours();
         phut = gioHT.getMinutes();
         giay = gioHT.getSeconds();
-        String gioHienTai = sdfGioHT.format(gioHT);
+
+        String ngayHienTai = sdfNgayHT.format(ngayHT),
+                gioHienTai = sdfGioHT.format(gioHT),
+                ngayGioHT = "" + ngayHienTai + ", " + gioHienTai;
 
         if (txtBHYT.equals("") || txtBV.equals("") || txtKhoa.equals("") || txtChuanDoan.equals(""))
             Toast.makeText(this, "Vui lòng nhập vào chỗ trống", Toast.LENGTH_SHORT).show();
@@ -121,11 +135,52 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
             ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
             ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                     .child("Lịch sử khám - Tư vấn")
-                    .child("Ngày khám: " + ngayHienTai + ", " + gioHienTai).setValue(thongTinLSKham_tuVan);
+                    .child("Ngày khám: " +ngayGioHT).setValue(thongTinLSKham_tuVan);
 
             Toast.makeText(this, "Lưu thành công", Toast.LENGTH_SHORT).show();
             resetAll();
         }
+    }
+
+    public void showDataLV() {
+        ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("Lịch sử khám - Tư vấn");
+
+        arrayAdapter=new ArrayAdapter<String>(this, R.layout.item_lichsukham, R.id.tvInfoLSK, arrayList);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String ngayKham = dataSnapshot.getKey();
+                    thongTinLSKham_tuVan = dataSnapshot.getValue(ThongTinLSKham_TuVan.class);
+                    String bhyt = "" + thongTinLSKham_tuVan.getBHYT(),
+                            bv = "" + thongTinLSKham_tuVan.getBenhVien(),
+                            khoa = "" + thongTinLSKham_tuVan.getKhoa(),
+                            chd = "" + thongTinLSKham_tuVan.getChuanDoan();
+
+                    String infoLSK = ""+ngayKham
+                                    +"\nBHYT: " +bhyt +"\t\t\tBệnh viện: " +bv
+                                    +"\nKhoa: " +khoa
+                                    +"\nChuẩn đoán: " +chd;
+                    arrayList.removeAll(Collections.singleton(infoLSK));
+                    arrayList.add(infoLSK);
+
+                    //java.util.Collections.reverse(arrayList); //sort descending; firebase auto ascending
+
+                    String checkLSK = "" +infoLSK;
+                    Log.d("CHECK LSK: ", checkLSK);
+                }
+                lvLSKham.setAdapter(arrayAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     public void resetAll(){
@@ -136,10 +191,4 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         edtChuanDoan.setText("");
     }
 
-//        public List<ThongTinLichSuKham> allThongTinLSKham(){
-//        List<ThongTinLichSuKham> list = new ArrayList<ThongTinLichSuKham>();
-//
-//
-//        return  list;
-//    }
 }

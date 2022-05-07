@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,14 +17,25 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
 
 public class SuaThongTinCaNhan_Activity extends AppCompatActivity {
     EditText edtHoTen, edtNgaySinh, edtSDT, edtCMND, edtBHYT;
@@ -32,6 +44,9 @@ public class SuaThongTinCaNhan_Activity extends AppCompatActivity {
     ImageView imgBack, imgAvatar;
 
     private int PICK_IMAGE_REQUEST = 1;
+    FirebaseStorage storage = FirebaseStorage.getInstance();
+    // Create a storage reference from our app
+    final StorageReference storageRef = storage.getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +68,8 @@ public class SuaThongTinCaNhan_Activity extends AppCompatActivity {
         btnHuyBo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                resetData();
+                Intent intent=new Intent(SuaThongTinCaNhan_Activity.this, NguoiDung_Activity.class);
+                startActivity(intent);
             }
         });
 
@@ -107,6 +123,14 @@ public class SuaThongTinCaNhan_Activity extends AppCompatActivity {
                 edtCMND.setText(thongTinCaNhan.getSoCMND());
                 edtSDT.setText(thongTinCaNhan.getSdt());
                 edtBHYT.setText(thongTinCaNhan.getSoBHYT());
+                if(!thongTinCaNhan.getImageId().trim().equalsIgnoreCase("")){
+                    Picasso.get().load(thongTinCaNhan.getImageId()).into(imgAvatar);
+                }
+                else{
+                    imgAvatar.setImageResource(R.drawable.avatar);
+                }
+
+                //imgAvatar.setImageURI(Uri.parse(thongTinCaNhan.getImageId()));
                 if(thongTinCaNhan.getGioiTinh().equalsIgnoreCase("Nam")){
                     rdNam.setChecked(true);
                 }
@@ -146,13 +170,63 @@ public class SuaThongTinCaNhan_Activity extends AppCompatActivity {
             gioiTinh="Khác";
         }
 
-        ThongTinCaNhan thongTinCaNhan=new ThongTinCaNhan(gioiTinh,hoTen, ngaySinh, sdt, bhyt, cmnd);
-        myReference.setValue(thongTinCaNhan, new DatabaseReference.CompletionListener() {
+        // Create a storage reference from our app
+        StorageReference storageRef = storage.getReference();
+
+    // Create a reference to "mountains.jpg"
+        StorageReference mountainsRef = storageRef.child("image.jpg");
+
+    // Create a reference to 'images/mountains.jpg'
+        StorageReference mountainImagesRef = storageRef.child("images");
+
+    // While the file names are the same, the references point to different files
+        mountainsRef.getName().equals(mountainImagesRef.getName());    // true
+        mountainsRef.getPath().equals(mountainImagesRef.getPath());    // false
+
+        // Get the data from an ImageView as bytes
+        imgAvatar.setDrawingCacheEnabled(true);
+        imgAvatar.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imgAvatar.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(data);
+        String finalGioiTinh = gioiTinh;
+        uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
-            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
-                Toast.makeText(SuaThongTinCaNhan_Activity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> result = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        String photoLink = uri.toString();
+
+                        ThongTinCaNhan thongTinCaNhan=new ThongTinCaNhan(finalGioiTinh,hoTen, ngaySinh, sdt, bhyt, cmnd,photoLink);
+                        myReference.setValue(thongTinCaNhan, new DatabaseReference.CompletionListener() {
+                            @Override
+                            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+                                Toast.makeText(SuaThongTinCaNhan_Activity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
             }
         });
+        
+
+//        ThongTinCaNhan thongTinCaNhan=new ThongTinCaNhan(gioiTinh,hoTen, ngaySinh, sdt, bhyt, cmnd,data);
+//        myReference.setValue(thongTinCaNhan, new DatabaseReference.CompletionListener() {
+//            @Override
+//            public void onComplete(@Nullable DatabaseError error, @NonNull DatabaseReference ref) {
+//                Toast.makeText(SuaThongTinCaNhan_Activity.this, "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 

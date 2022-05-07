@@ -29,7 +29,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/imgBack_SuaTT"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+       />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="414dp"
@@ -91,7 +92,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvHoTen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvHoTen"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:padding="10sp"/>
 
         <TextView
             android:id="@+id/tvNgaySinh"
@@ -116,7 +118,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvNgaySinh"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvNgaySinh"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:padding="10sp"/>
 
         <TextView
             android:id="@+id/ckGioiTinh"
@@ -186,7 +189,8 @@
             app:layout_constraintBottom_toBottomOf="@+id/tvSDT"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvSDT"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:padding="10sp"/>
 
         <TextView
             android:id="@+id/tvCMND"
@@ -211,7 +215,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvCMND"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:padding="10sp"/>
 
         <TextView
             android:id="@+id/tvBHYT"
@@ -236,7 +241,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvBHYT"
-            tools:ignore="SpeakableTextPresentCheck" />
+            tools:ignore="SpeakableTextPresentCheck"
+            android:padding="10sp"/>
 
         <android.widget.Button
             android:id="@+id/btnCapNhat"

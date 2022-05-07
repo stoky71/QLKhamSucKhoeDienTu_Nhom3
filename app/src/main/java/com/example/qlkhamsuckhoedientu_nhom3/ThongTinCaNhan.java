@@ -7,7 +7,15 @@ public class ThongTinCaNhan {
     private String sdt;
     private String soBHYT;
     private String soCMND;
+    private String imageId;
 
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
 
     public String getHoTen() {
         return hoTen;
@@ -73,13 +81,14 @@ public class ThongTinCaNhan {
     public ThongTinCaNhan() {
     }
 
-    public ThongTinCaNhan(String gioiTinh, String hoTen, String ngaySinh, String sdt, String soBHYT, String soCMND) {
+    public ThongTinCaNhan(String gioiTinh, String hoTen, String ngaySinh, String sdt, String soBHYT, String soCMND, String imageId) {
         this.gioiTinh = gioiTinh;
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.sdt = sdt;
         this.soBHYT = soBHYT;
         this.soCMND = soCMND;
+        this.imageId = imageId;
     }
 
     @Override
@@ -91,6 +100,7 @@ public class ThongTinCaNhan {
                 ", sdt='" + sdt + '\'' +
                 ", soBHYT='" + soBHYT + '\'' +
                 ", soCMND='" + soCMND + '\'' +
+                ", imageId='" + imageId + '\'' +
                 '}';
     }
 }

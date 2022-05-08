@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +34,6 @@ import java.util.Collections;
 import java.util.Date;
 
 public class LichSuKham_TuVan_Activity extends AppCompatActivity {
-    private TaiKhoan taiKhoan;
     private ThongTinLSKham_TuVan thongTinLSKham_tuVan;
     private ArrayList<String> arrayList=new ArrayList<>();
     private ArrayAdapter<String> arrayAdapter;
@@ -66,25 +68,20 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         btnHuy = findViewById(R.id.btnHuy);
         lvLSKham = findViewById(R.id.lvLSKham);
 
-//        loadNgayGioHT();
         showDataLV();
-
-//        arrayList = new ArrayList<ThongTinLichSuKham>();
-//        ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
-//        ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Lịch sử khám - Tư vấn");
-//
-//        lsKhamTuVanAdapter = new LSKham_TuVan_Adapter(getApplicationContext(), R.layout.item_lichsukham, arrayList, ref);
-//        lvLSKham.setAdapter(lsKhamTuVanAdapter);
-
-
-//        showDataLV(ngayGioHT);
 
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 addDataToRealtimeDB();
-//                showDataLV();
+            }
+        });
+
+        btnXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDataLV(); // vì có hàm xóa con
             }
         });
 
@@ -99,6 +96,46 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 LichSuKham_TuVan_Activity.this.startActivity(new Intent(LichSuKham_TuVan_Activity.this, NguoiDung_Activity.class));
+            }
+        });
+    }
+
+    public void showDataLV() {
+        ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("Lịch sử khám - Tư vấn");
+
+        arrayAdapter=new ArrayAdapter<String>(this, R.layout.item_lichsukham, R.id.tvInfoLSK, arrayList);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String ngayKham = dataSnapshot.getKey();
+                    thongTinLSKham_tuVan = dataSnapshot.getValue(ThongTinLSKham_TuVan.class);
+                    String bhyt = "" + thongTinLSKham_tuVan.getBHYT(),
+                            bv = "" + thongTinLSKham_tuVan.getBenhVien(),
+                            khoa = "" + thongTinLSKham_tuVan.getKhoa(),
+                            chd = "" + thongTinLSKham_tuVan.getChuanDoan();
+
+                    String infoLSK = ""+ngayKham
+                            +"\nBHYT: " +bhyt +"\t\t\tBệnh viện: " +bv
+                            +"\nKhoa: " +khoa
+                            +"\nChuẩn đoán: " +chd;
+                    arrayList.removeAll(Collections.singleton(infoLSK));
+                    arrayList.add(infoLSK);
+
+                    //java.util.Collections.reverse(arrayList); //sort descending; firebase auto ascending
+
+                    String checkLSK = "" +infoLSK;
+                    Log.d("CHECK LSK: ", checkLSK);
+
+                    chooseInfoToDel(arrayList);
+                }
+                lvLSKham.setAdapter(arrayAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
@@ -142,45 +179,41 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         }
     }
 
-    public void showDataLV() {
-        ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child("Lịch sử khám - Tư vấn");
-
-        arrayAdapter=new ArrayAdapter<String>(this, R.layout.item_lichsukham, R.id.tvInfoLSK, arrayList);
-
-        ref.addValueEventListener(new ValueEventListener() {
+    public void chooseInfoToDel(ArrayList arrayList){
+        lvLSKham.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    String ngayKham = dataSnapshot.getKey();
-                    thongTinLSKham_tuVan = dataSnapshot.getValue(ThongTinLSKham_TuVan.class);
-                    String bhyt = "" + thongTinLSKham_tuVan.getBHYT(),
-                            bv = "" + thongTinLSKham_tuVan.getBenhVien(),
-                            khoa = "" + thongTinLSKham_tuVan.getKhoa(),
-                            chd = "" + thongTinLSKham_tuVan.getChuanDoan();
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                ArrayList<String> arrayList1 = new ArrayList<>();
+//                String getInfo = arrayList1.get(i);
+                String getInfo = adapterView.getItemAtPosition(i).toString();
 
-                    String infoLSK = ""+ngayKham
-                                    +"\nBHYT: " +bhyt +"\t\t\tBệnh viện: " +bv
-                                    +"\nKhoa: " +khoa
-                                    +"\nChuẩn đoán: " +chd;
-                    arrayList.removeAll(Collections.singleton(infoLSK));
-                    arrayList.add(infoLSK);
+                if(arrayList.contains(getInfo) == true){ //check getInfo có trong arrayList hay ko
+                    btnXoa.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //cop đoạn chuỗi từ getInfo qua getNgayKham; bắt đầu từ 0, dừng ở ký tự 33 (chữ M trong AM hoặc PM), 34 ko lấy
+                            String getNgayKham = getInfo.substring(0, 34);
+                            ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .child("Lịch sử khám - Tư vấn");
+                            ref.child(getNgayKham).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(LichSuKham_TuVan_Activity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            arrayList.remove(getInfo);
+                        }
+                    });
 
-                    //java.util.Collections.reverse(arrayList); //sort descending; firebase auto ascending
-
-                    String checkLSK = "" +infoLSK;
-                    Log.d("CHECK LSK: ", checkLSK);
+                    String log = "" + getInfo;
+                    Log.d("check get 1 info: ", log);
+                    Toast.makeText(LichSuKham_TuVan_Activity.this, ""+getInfo, Toast.LENGTH_SHORT).show();
                 }
-                lvLSKham.setAdapter(arrayAdapter);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-
     }
 
     public void resetAll(){

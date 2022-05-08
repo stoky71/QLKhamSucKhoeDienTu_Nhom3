@@ -41,6 +41,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
+        <Button
+            android:id="@+id/btnCapNhatLSK"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="13dp"
+            android:backgroundTint="#07919C"
+            android:text="Cập nhật"
+            app:layout_constraintBottom_toBottomOf="@+id/btnXoa"
+            app:layout_constraintStart_toEndOf="@+id/btnXoa"
+            app:layout_constraintTop_toTopOf="@+id/btnXoa" />
+
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="74dp"
@@ -80,40 +91,38 @@
 
         <Button
             android:id="@+id/btnLuu"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="60dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="35dp"
             android:backgroundTint="#07919C"
             android:text="Lưu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtChuanDoan" />
+            app:layout_constraintTop_toBottomOf="@+id/tvCD" />
 
         <Button
             android:id="@+id/btnXoa"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="60dp"
-            android:layout_marginStart="24dp"
+            android:layout_marginStart="12dp"
             android:backgroundTint="#07919C"
             android:text="Xóa"
             app:layout_constraintBottom_toBottomOf="@+id/btnLuu"
-            app:layout_constraintEnd_toStartOf="@+id/btnHuy"
-            app:layout_constraintHorizontal_bias="0.254"
             app:layout_constraintStart_toEndOf="@+id/btnLuu"
-            app:layout_constraintTop_toTopOf="@+id/btnLuu"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toTopOf="@+id/btnLuu" />
 
         <Button
             android:id="@+id/btnHuy"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="60dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="32dp"
             android:backgroundTint="#07919C"
             android:text="Hủy"
-            app:layout_constraintBottom_toBottomOf="@+id/btnXoa"
+            app:layout_constraintBottom_toBottomOf="@+id/btnCapNhatLSK"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnXoa"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toEndOf="@+id/btnCapNhatLSK"
+            app:layout_constraintTop_toTopOf="@+id/btnCapNhatLSK" />
 
         <EditText
             android:id="@+id/edtBHYT"

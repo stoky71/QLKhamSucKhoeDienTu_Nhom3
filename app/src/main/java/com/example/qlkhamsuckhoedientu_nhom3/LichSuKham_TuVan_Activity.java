@@ -47,7 +47,7 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
 
     ImageView imgBack_LSKham;
     EditText edtBHYT, edtBenhVien, edtKhoa, edtChuanDoan;
-    Button btnLuu, btnXoa, btnHuy;
+    Button btnLuu, btnXoa, btnCapNhatLSK, btnHuy;
 
     TextView tvInfoLSK;
     ListView lvLSKham;
@@ -65,23 +65,17 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         edtChuanDoan = findViewById(R.id.edtChuanDoan);
         btnLuu = findViewById(R.id.btnLuu);
         btnXoa = findViewById(R.id.btnXoa);
+        btnCapNhatLSK = findViewById(R.id.btnCapNhatLSK);
         btnHuy = findViewById(R.id.btnHuy);
         lvLSKham = findViewById(R.id.lvLSKham);
 
-        showDataLV();
+        showDataLV(); //show LV, delete, update
 
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
                 addDataToRealtimeDB();
-            }
-        });
-
-        btnXoa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDataLV(); // vì có hàm xóa con
             }
         });
 
@@ -119,9 +113,9 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                             chd = "" + thongTinLSKham_tuVan.getChuanDoan();
 
                     String infoLSK = ""+ngayKham
-                            +"\nBHYT: " +bhyt +"\t\t\tBệnh viện: " +bv
-                            +"\nKhoa: " +khoa
-                            +"\nChuẩn đoán: " +chd;
+                            +"\nBHYT: " +bhyt +" \t\t\tBệnh viện: " +bv +"   "
+                            +"\nKhoa: " +khoa +"     "
+                            +"\nChuẩn đoán: " +chd +"    ";
                     arrayList.removeAll(Collections.singleton(infoLSK));
                     arrayList.add(infoLSK);
 
@@ -130,7 +124,7 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                     String checkLSK = "" +infoLSK;
                     Log.d("CHECK LSK: ", checkLSK);
 
-                    chooseInfoToDel(arrayList);
+                    chooseInfoDeleteOrUpdate(arrayList);
                 }
                 lvLSKham.setAdapter(arrayAdapter);
             }
@@ -179,7 +173,7 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         }
     }
 
-    public void chooseInfoToDel(ArrayList arrayList){
+    public void chooseInfoDeleteOrUpdate(ArrayList arrayList){
         lvLSKham.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -187,15 +181,27 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
 //                String getInfo = arrayList1.get(i);
                 String getInfo = adapterView.getItemAtPosition(i).toString();
 
+                //cop đoạn chuỗi từ getInfo qua getNgayKham; bắt đầu từ 0, dừng ở ký tự 33 (chữ M trong AM hoặc PM), 34 ko lấy
+                String getNgayKham = getInfo.substring(0, 34);
+
+                ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .child("Lịch sử khám - Tư vấn");
+
+//                edtBHYT.setText(getInfo.substring(41, 46)); //41 là kí tự C; K //ok
+//                edtBenhVien.setText(getInfo.substring(61, 67)); //50 là kí tự B, 67 \n
+//                edtKhoa.setText(getInfo.substring(74, 85)); //68 là kí tự X (Xét nghiệm), 85 \n
+//                edtChuanDoan.setText(getInfo.substring(98, 111)); //86 là kí tự C, 96 :,
+
+//                if(arrayList.contains("")==true)
+//                    Toast.makeText(LichSuKham_TuVan_Activity.this, "Chưa chọn thông tin lịch sử để thực hiện các chức năng", Toast.LENGTH_SHORT).show();
+
                 if(arrayList.contains(getInfo) == true){ //check getInfo có trong arrayList hay ko
+                    //xóa
                     btnXoa.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //cop đoạn chuỗi từ getInfo qua getNgayKham; bắt đầu từ 0, dừng ở ký tự 33 (chữ M trong AM hoặc PM), 34 ko lấy
-                            String getNgayKham = getInfo.substring(0, 34);
-                            ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .child("Lịch sử khám - Tư vấn");
+
                             ref.child(getNgayKham).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -205,6 +211,36 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                                 }
                             });
                             arrayList.remove(getInfo);
+                            resetAll();
+                        }
+                    });
+
+                    //cập nhật
+                    btnCapNhatLSK.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String txtBHYT = edtBHYT.getText().toString().trim(),
+                                    txtBV = edtBenhVien.getText().toString().trim(),
+                                    txtKhoa = edtKhoa.getText().toString().trim(),
+                                    txtChuanDoan = edtChuanDoan.getText().toString().trim();
+
+                            if (txtBHYT.equals("") || txtBV.equals("") || txtKhoa.equals("") || txtChuanDoan.equals(""))
+                                Toast.makeText(LichSuKham_TuVan_Activity.this, "Vui lòng nhập vào chỗ trống", Toast.LENGTH_SHORT).show();
+                            else {
+                                thongTinLSKham_tuVan = new ThongTinLSKham_TuVan(txtBHYT, txtChuanDoan, txtBV, txtKhoa);
+
+                                ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
+                                ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .child("Lịch sử khám - Tư vấn")
+                                        .child(getNgayKham).setValue(thongTinLSKham_tuVan);
+
+                                Toast.makeText(LichSuKham_TuVan_Activity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                                resetAll();
+
+                                //reload activity
+                                finish();
+                                startActivity(getIntent());
+                            }
                         }
                     });
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -81,6 +82,12 @@ public class DangKy_Activity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập số điện thoại đăng ký!", Toast.LENGTH_SHORT).show();
         if (txtHoTenDK.equals(""))
             Toast.makeText(this, "Vui lòng nhập họ tên đăng ký!", Toast.LENGTH_SHORT).show();
+
+        //regex email
+        if(!Patterns.EMAIL_ADDRESS.matcher(txtEmailDK).matches()){
+            edtEmailDK.requestFocus();
+            edtEmailDK.setError("Email không hợp lệ!");
+        }
 
         //insert account
         if (!txtHoTenDK.equals("") && !txtSdtDK.equals("") && !txtEmailDK.equals("") && !txtMkDK.equals("")) {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -101,6 +102,7 @@ public class NguoiDung_Activity extends AppCompatActivity {
             public void onClick(View view) {
                 auth.signOut();
                 NguoiDung_Activity.this.startActivity(new Intent(NguoiDung_Activity.this, DangNhap_Activity.class));
+                Toast.makeText(NguoiDung_Activity.this, "Đăng xuất thành công", Toast.LENGTH_SHORT).show();
             }
         });
     }

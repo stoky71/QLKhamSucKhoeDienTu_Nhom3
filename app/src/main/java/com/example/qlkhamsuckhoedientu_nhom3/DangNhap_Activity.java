@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 public class DangNhap_Activity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class DangNhap_Activity extends AppCompatActivity {
     private ThongTinCaNhan thongTinCaNhan;
 
     private FirebaseAuth auth;
+    private FirebaseUser user;
     private DatabaseReference ref;
 
     TextInputEditText edtEmailDN, edtMkDN;
@@ -41,6 +44,7 @@ public class DangNhap_Activity extends AppCompatActivity {
         tvDKNgay = findViewById(R.id.tvDKNgay);
 
         auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
         btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,7 +60,13 @@ public class DangNhap_Activity extends AppCompatActivity {
         tvQuenMK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DangNhap_Activity.this.startActivity(new Intent(DangNhap_Activity.this, Quen_DoiMK_Activity.class));
+                String txtEmailDN = edtEmailDN.getText().toString().trim();
+                if(!txtEmailDN.equals("")) {
+                    auth.sendPasswordResetEmail(txtEmailDN);
+                    Toast.makeText(DangNhap_Activity.this, "Đã gửi email để đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
+                }
+                else
+                    Toast.makeText(DangNhap_Activity.this, "Vui lòng nhập email để đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -80,6 +90,11 @@ public class DangNhap_Activity extends AppCompatActivity {
         if (txtEmailDN.equals(""))
             Toast.makeText(this, "Vui lòng nhập email đăng nhập!", Toast.LENGTH_SHORT).show();
 
+        //regex email
+        if(!Patterns.EMAIL_ADDRESS.matcher(txtEmailDN).matches()){
+            edtEmailDN.requestFocus();
+            edtEmailDN.setError("Email không hợp lệ!");
+        }
 
         if(!txtEmailDN.equals("") && !txtMkDN.equals("")){
             auth.signInWithEmailAndPassword(txtEmailDN, txtMkDN)

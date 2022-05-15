@@ -21,6 +21,10 @@ public class ThongTinChung {
         this.thongTinLSKham_tuVan = thongTinLSKham_tuVan;
     }
 
+    public ThongTinChung(ThongTinLSKham_TuVan thongTinLSKham_tuVan) {
+        this.thongTinLSKham_tuVan = thongTinLSKham_tuVan;
+    }
+
     public ThongTinChung() {
     }
 

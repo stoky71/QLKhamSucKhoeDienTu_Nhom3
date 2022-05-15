@@ -77,9 +77,10 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         lvLSKham = findViewById(R.id.lvLSKham);
 
         db = new SQLiteDBHandler(getApplicationContext());
-        thongTinChungArrayList = (ArrayList<ThongTinChung>) db.getAllPatientsInfo();
+//        thongTinChungArrayList = (ArrayList<ThongTinChung>) db.getAllPatientsInfo();
 
-        showDataLV(); //show LV, delete, update
+        showDataLV(); //show LV; hàm chooseInfoDeleteOrUpdate(arrayList) xử lý delete, update
+//        testSQLiteData();
 
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -206,7 +207,8 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                 String getInfo = adapterView.getItemAtPosition(i).toString();
 
                 //cop đoạn chuỗi từ getInfo qua getNgayKham; bắt đầu từ 0, dừng ở ký tự 33 (chữ M trong AM hoặc PM), 34 ko lấy
-                String getNgayKham = getInfo.substring(0, 34);
+                String getNgayKham = getInfo.substring(0, 34),
+                        getNgayKhamSQLite = getInfo.substring(11, 34);
 
                 ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân")
                         .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -225,11 +227,15 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                     btnXoa.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
+                            //realtimeDB
                             ref.child(getNgayKham).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
+                                        //sqliteDB
+                                        thongTinChung=new ThongTinChung(new ThongTinLSKham_TuVan(getNgayKhamSQLite));
+                                        db.deletePatientsInfo(thongTinChung);
+
                                         Toast.makeText(LichSuKham_TuVan_Activity.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -253,10 +259,15 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                             else {
                                 thongTinLSKham_tuVan = new ThongTinLSKham_TuVan(txtBHYT, txtChuanDoan, txtBV, txtKhoa);
 
+                                //realtimeDB
                                 ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
                                 ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                         .child("Lịch sử khám - Tư vấn")
                                         .child(getNgayKham).setValue(thongTinLSKham_tuVan);
+
+                                //sqliteDB
+//                                thongTinChung = new ThongTinChung(thongTinLSKham_tuVan);
+//                                db.updatePatientsInfo(thongTinChung);
 
                                 Toast.makeText(LichSuKham_TuVan_Activity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                 resetAll();
@@ -274,10 +285,6 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    public void loadUserName() {
-
     }
 
     public void resetAll(){

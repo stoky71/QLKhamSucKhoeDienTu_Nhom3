@@ -62,6 +62,10 @@ public class ThongTinLSKham_TuVan {
         this.khoa = khoa;
     }
 
+    public ThongTinLSKham_TuVan(String ngayKham) {
+        this.ngayKham = ngayKham;
+    }
+
     public ThongTinLSKham_TuVan() {
     }
 }

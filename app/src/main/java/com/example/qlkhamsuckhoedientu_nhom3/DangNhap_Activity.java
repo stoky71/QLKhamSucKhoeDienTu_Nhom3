@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 
 public class DangNhap_Activity extends AppCompatActivity {
     private TaiKhoan taiKhoan;
-    private ThongTinCaNhan thongTinCaNhan;
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -104,8 +103,6 @@ public class DangNhap_Activity extends AppCompatActivity {
                             if(task.isSuccessful()){
                                 taiKhoan = new TaiKhoan(txtEmailDN, txtMkDN);
                                 infoTkDN(taiKhoan);
-
-//                                thongTinCaNhan = new ThongTinCaNhan(taiKhoan.getHoTen());
 
                                 Toast.makeText(DangNhap_Activity.this, "Tài khoản có email là " + txtEmailDN + " đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                 DangNhap_Activity.this.startActivity(new Intent(DangNhap_Activity.this, NguoiDung_Activity.class));

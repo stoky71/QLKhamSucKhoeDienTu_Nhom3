@@ -18,8 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class NguoiDung_Activity extends AppCompatActivity {
-    private TaiKhoan taiKhoan;
-
     private FirebaseAuth auth;
     private DatabaseReference ref;
 
@@ -72,6 +70,7 @@ public class NguoiDung_Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(NguoiDung_Activity.this, LichSuKham_TuVan_Activity.class);
+                intent.putExtra("tenNguoiDung", tvTenNguoiDung.getText().toString());
                 startActivity(intent);
             }
         });

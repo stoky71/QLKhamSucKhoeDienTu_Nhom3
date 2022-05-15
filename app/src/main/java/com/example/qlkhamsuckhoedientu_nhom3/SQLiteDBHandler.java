@@ -70,19 +70,6 @@ public class SQLiteDBHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    // code to get the single name
-//    Name getName(int id) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        Cursor cursor = db.query(TABLE_CONTACTS_NAME, new String[] { KEY_ID_1}, KEY_ID_1 + "=?",
-//                new String[] { String.valueOf(id) }, null, null, null, null);
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//
-//        Name name = new Name(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
-//        return name;
-//    }
-
     public List<ThongTinChung> getAllPatientsInfo() {
         List<ThongTinChung> thongTinChungList=new ArrayList<ThongTinChung>();
         // Select All Query
@@ -113,7 +100,6 @@ public class SQLiteDBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_NGAYKHAM, thongTinChung.getThongTinLSKham_tuVan().getNgayKham());
         values.put(KEY_BHYT, thongTinChung.getThongTinLSKham_tuVan().getBHYT());
         values.put(KEY_BENHVIEN, thongTinChung.getThongTinLSKham_tuVan().getBenhVien());
         values.put(KEY_KHOA, thongTinChung.getThongTinLSKham_tuVan().getKhoa());

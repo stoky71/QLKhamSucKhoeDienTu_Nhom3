@@ -80,7 +80,6 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
 //        thongTinChungArrayList = (ArrayList<ThongTinChung>) db.getAllPatientsInfo();
 
         showDataLV(); //show LV; hàm chooseInfoDeleteOrUpdate(arrayList) xử lý delete, update
-//        testSQLiteData();
 
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -266,8 +265,9 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                                         .child(getNgayKham).setValue(thongTinLSKham_tuVan);
 
                                 //sqliteDB
-//                                thongTinChung = new ThongTinChung(thongTinLSKham_tuVan);
-//                                db.updatePatientsInfo(thongTinChung);
+                                ThongTinLSKham_TuVan detailLsKhamTuVan = new ThongTinLSKham_TuVan(getNgayKhamSQLite, txtBHYT, txtChuanDoan, txtBV, txtKhoa);
+                                thongTinChung = new ThongTinChung(detailLsKhamTuVan);
+                                db.updatePatientsInfo(thongTinChung);
 
                                 Toast.makeText(LichSuKham_TuVan_Activity.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                                 resetAll();

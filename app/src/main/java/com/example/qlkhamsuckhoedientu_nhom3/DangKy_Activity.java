@@ -26,7 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 public class DangKy_Activity extends AppCompatActivity {
     private TaiKhoan taiKhoan;
     private ThongTinCaNhan thongTinCaNhan;
-    private ThongTinLSKham_TuVan lichSuKham;
 
     private FirebaseAuth auth;
     private DatabaseReference ref;
@@ -124,12 +123,12 @@ public class DangKy_Activity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             thongTinCaNhan = new ThongTinCaNhan("", txtHoTenDK, "", txtSdtDK, "", "","");
                             taiKhoan = new TaiKhoan(txtEmailDK, txtMkDK);
-//                            lichSuKham = new ThongTinLSKham_TuVan();
 
                             addDataToRealtimeDB(taiKhoan, thongTinCaNhan);
 
                             Toast.makeText(DangKy_Activity.this, "Tài khoản có email là " +txtEmailDK+" đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                            DangKy_Activity.this.startActivity(new Intent(DangKy_Activity.this, NguoiDung_Activity.class));
+//                            DangKy_Activity.this.startActivity(new Intent(DangKy_Activity.this, NguoiDung_Activity.class));
+                            DangKy_Activity.this.startActivity(new Intent(DangKy_Activity.this, DangNhap_Activity.class));
 
                             edtHoTenDK.setText("");
                             edtSdtDK.setText("");
@@ -149,19 +148,6 @@ public class DangKy_Activity extends AppCompatActivity {
         ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
         ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Tài khoản").setValue(taiKhoan);
         ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Thông tin cá nhân").setValue(thongTinCaNhan);
-//        ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Lịch sử khám - Tư vấn").setValue(lichSuKham);
-//        ref.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                if(snapshot.exists()){
-//
-//                }
-//            }
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
     }
 
     //check tk đăng ký

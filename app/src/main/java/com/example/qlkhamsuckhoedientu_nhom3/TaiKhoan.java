@@ -25,6 +25,10 @@ public class TaiKhoan {
         this.matKhau = matKhau;
     }
 
+    public TaiKhoan(String email) {
+        this.email = email;
+    }
+
     public TaiKhoan() {
     }
 }

@@ -34,11 +34,16 @@ import java.util.Collections;
 import java.util.Date;
 
 public class LichSuKham_TuVan_Activity extends AppCompatActivity {
+    private ThongTinChung thongTinChung;
     private ThongTinLSKham_TuVan thongTinLSKham_tuVan;
+    private ThongTinCaNhan thongTinCaNhan;
+
     private ArrayList<String> arrayList=new ArrayList<>();
     private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<ThongTinChung> thongTinChungArrayList=new ArrayList<ThongTinChung>();
 
     private DatabaseReference ref;
+    private SQLiteDBHandler db;
 
     private Date ngayHT, gioHT;
     private SimpleDateFormat sdfNgayHT=new SimpleDateFormat("dd-MM-yyyy"), sdfGioHT =new SimpleDateFormat("HH:mm:ss a");
@@ -46,7 +51,7 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
     int ngay, thang, nam, gio, phut, giay;
 
     ImageView imgBack_LSKham;
-    EditText edtBHYT, edtBenhVien, edtKhoa, edtChuanDoan;
+    EditText edtBHYT, edtBenhVien, edtKhoa, edtChuanDoan, edtEmailDN;
     Button btnLuu, btnXoa, btnCapNhatLSK, btnHuy;
 
     TextView tvInfoLSK;
@@ -56,6 +61,8 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lichsukham_tuvan);
+
+        edtEmailDN = findViewById(R.id.edtEmailDN);
 
         imgBack_LSKham = findViewById(R.id.imgBack_LSKham);
         tvInfoLSK = findViewById(R.id.tvInfoLSK);
@@ -69,13 +76,16 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         btnHuy = findViewById(R.id.btnHuy);
         lvLSKham = findViewById(R.id.lvLSKham);
 
+        db = new SQLiteDBHandler(getApplicationContext());
+        thongTinChungArrayList = (ArrayList<ThongTinChung>) db.getAllPatientsInfo();
+
         showDataLV(); //show LV, delete, update
 
         btnLuu.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                addDataToRealtimeDB();
+                checkInputs();
             }
         });
 
@@ -135,7 +145,7 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void addDataToRealtimeDB() {
+    public void checkInputs() {
         String txtBHYT = edtBHYT.getText().toString().trim(),
                 txtBV = edtBenhVien.getText().toString().trim(),
                 txtKhoa = edtKhoa.getText().toString().trim(),
@@ -161,16 +171,30 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
         if (txtBHYT.equals("") || txtBV.equals("") || txtKhoa.equals("") || txtChuanDoan.equals(""))
             Toast.makeText(this, "Vui lòng nhập vào chỗ trống", Toast.LENGTH_SHORT).show();
         else {
-            thongTinLSKham_tuVan = new ThongTinLSKham_TuVan(txtBHYT, txtChuanDoan, txtBV, txtKhoa);
+            //load username
+            String ten= getIntent().getStringExtra("tenNguoiDung");
 
-            ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
-            ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                    .child("Lịch sử khám - Tư vấn")
-                    .child("Ngày khám: " +ngayGioHT).setValue(thongTinLSKham_tuVan);
-
-            Toast.makeText(this, "Lưu thành công", Toast.LENGTH_SHORT).show();
-            resetAll();
+            writeData(ten, ngayGioHT, txtBHYT, txtChuanDoan, txtBV, txtKhoa);
         }
+    }
+
+    public void writeData(String ten, String ngayGioHT, String txtBHYT, String txtChuanDoan, String txtBV, String txtKhoa){
+        //realtimeDB
+        thongTinLSKham_tuVan = new ThongTinLSKham_TuVan(txtBHYT, txtChuanDoan, txtBV, txtKhoa);
+        ref = FirebaseDatabase.getInstance().getReference("Bệnh nhân");
+        ref.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("Lịch sử khám - Tư vấn")
+                .child("Ngày khám: " +ngayGioHT).setValue(thongTinLSKham_tuVan);
+
+        //sqliteDB
+        thongTinCaNhan = new ThongTinCaNhan(ten);
+        ThongTinLSKham_TuVan allInfoLSK = new ThongTinLSKham_TuVan(ngayGioHT, txtBHYT, txtChuanDoan, txtBV, txtKhoa);
+        thongTinChung = new ThongTinChung(thongTinCaNhan, allInfoLSK);
+        db.addPatientsInfo(thongTinChung);
+
+        Toast.makeText(this, "Lưu thành công", Toast.LENGTH_SHORT).show();
+        resetAll();
+
     }
 
     public void chooseInfoDeleteOrUpdate(ArrayList arrayList){
@@ -250,6 +274,10 @@ public class LichSuKham_TuVan_Activity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void loadUserName() {
+
     }
 
     public void resetAll(){

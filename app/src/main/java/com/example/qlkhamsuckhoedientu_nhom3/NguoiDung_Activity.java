@@ -39,6 +39,7 @@ public class NguoiDung_Activity extends AppCompatActivity {
         btnChinhSua = findViewById(R.id.btnChinhSuaTT);
         btnLichSuKham = findViewById(R.id.btnLichSuKham);
         btnDoiMatKhau = findViewById(R.id.btnDoiMatKhau);
+        imgAvatar = findViewById(R.id.imgAvaUser);
 
         //nhận data tên người dùng
         loadUserName();

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class NguoiDung_Activity extends AppCompatActivity {
     private FirebaseAuth auth;
@@ -26,6 +28,7 @@ public class NguoiDung_Activity extends AppCompatActivity {
     Button btnChinhSua;
     Button btnLichSuKham;
     Button btnDoiMatKhau;
+    ImageView imgAvatar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,13 @@ public class NguoiDung_Activity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         ThongTinCaNhan thongTinCaNhan = snapshot.getValue(ThongTinCaNhan.class);
                         tvTenNguoiDung.setText(thongTinCaNhan.getHoTen());
+                        //load ảnh
+                        if(!thongTinCaNhan.getImageId().trim().equalsIgnoreCase("")){
+                            Picasso.get().load(thongTinCaNhan.getImageId()).into(imgAvatar);
+                        }
+                        else{
+                            imgAvatar.setImageResource(R.drawable.avatar);
+                        }
                     }
 
                     @Override
